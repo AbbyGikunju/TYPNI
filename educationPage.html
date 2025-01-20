@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="educationPage.css">
+    <title>Video Gallery</title>
+</head>
+<body>
+    <h1>Survivor Support Page</h1>
+    <div class="scroll-wrapper">
+        <button class="scroll-button left" onclick="scrollLeftAction()">&#8249;</button>
+        <div class="scroll-container">
+            <div class="card">
+                <iframe class="responsive-iframe" src="https://www.youtube.com/embed/tgbNymZ7vqY?rel=0" allowfullscreen></iframe>
+                <p class="video-description">Description of the first video.</p>
+            </div>
+            <div class="card">
+                <iframe class="responsive-iframe" src="https://www.youtube.com/embed/tgbNymZ7vqY?rel=0" allowfullscreen></iframe>
+                <p class="video-description">Description of the second video.</p>
+            </div>
+            <div class="card">
+                <iframe class="responsive-iframe" src="https://www.youtube.com/embed/tgbNymZ7vqY?rel=0" allowfullscreen></iframe>
+                <p class="video-description">Description of the third video.</p>
+            </div>
+            <div class="card">
+                <iframe class="responsive-iframe" src="https://www.youtube.com/embed/tgbNymZ7vqY?rel=0" allowfullscreen></iframe>
+                <p class="video-description">Description of the fourth video.</p>
+            </div>
+            <div class="card">
+                <iframe class="responsive-iframe" src="https://www.youtube.com/embed/tgbNymZ7vqY?rel=0" allowfullscreen></iframe>
+                <p class="video-description">Description of the first video.</p>
+            </div>
+            <div class="card">
+                <iframe class="responsive-iframe" src="https://www.youtube.com/embed/tgbNymZ7vqY?rel=0" allowfullscreen></iframe>
+                <p class="video-description">Description of the first video.</p>
+            </div>
+            <div class="card">
+                <iframe class="responsive-iframe" src="https://www.youtube.com/embed/tgbNymZ7vqY?rel=0" allowfullscreen></iframe>
+                <p class="video-description">Description of the first video.</p>
+            </div>
+        </div>
+        <button class="scroll-button right" onclick="scrollRight()">&#8250;</button>
+    </div>
+
+    <section>
+        <h2>Survivor Stories</h2>
+        <div class="testimonial-slider">
+            <div class="testimonial active">
+                <p>"Getting support from FIDA Kenya saved my life. I now feel hopeful and empowered."</p>
+            </div>
+            <div class="testimonial">
+                <p>"The counseling services helped me cope and heal. I encourage every survivor to seek help."</p>
+            </div>
+            <div class="testimonial">
+                <p>"Accessing the helplines gave me immediate help when I needed it the most."</p>
+            </div>
+        </div>
+        <div class="dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </section>
+
+    <script>
+        const scrollContainer = document.querySelector('.scroll-container');
+        const leftButton = document.querySelector('.scroll-button.left');
+        const rightButton = document.querySelector('.scroll-button.right');
+
+        // Update arrow visibility
+        function updateArrows() {
+            const scrollLeft = scrollContainer.scrollLeft;
+            const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+
+            leftButton.style.display = scrollLeft > 0 ? 'block' : 'none';
+            rightButton.style.display = scrollLeft < maxScrollLeft ? 'block' : 'none';
+        }
+
+        // Scroll left
+        function scrollLeftAction() {
+            scrollContainer.scrollBy({
+                top: 0,
+                left: -scrollContainer.clientWidth / 2,
+                behavior: 'smooth'
+            });
+        }
+
+        // Scroll right
+        function scrollRight() {
+            scrollContainer.scrollBy({
+                top: 0,
+                left: scrollContainer.clientWidth / 2,
+                behavior: 'smooth'
+            });
+        }
+
+        // Initial arrow update
+        updateArrows();
+
+        // Update arrows on scroll
+        scrollContainer.addEventListener('scroll', updateArrows);
+
+
+
+        // JavaScript for Automatic Slideshow
+        let currentIndex = 0;
+        const testimonials = document.querySelectorAll('.testimonial');
+        const dots = document.querySelectorAll('.dot');
+
+        function showTestimonial(index) {
+            // Hide all testimonials
+            testimonials.forEach((testimonial, i) => {
+                testimonial.classList.remove('active');
+                dots[i].classList.remove('active');
+            });
+            // Show the selected testimonial
+            testimonials[index].classList.add('active');
+            dots[index].classList.add('active');
+        }
+
+        function nextTestimonial() {
+            currentIndex = (currentIndex + 1) % testimonials.length;
+            showTestimonial(currentIndex);
+        }
+
+        // Automatically change testimonials every 3 seconds
+        setInterval(nextTestimonial, 3000);
+
+        // Add click functionality to dots
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                currentIndex = i;
+                showTestimonial(currentIndex);
+            });
+        });
+
+    </script>
+</body>
+</html>
